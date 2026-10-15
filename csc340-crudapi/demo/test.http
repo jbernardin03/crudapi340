@@ -76,5 +76,20 @@ Content-Type: application/json
   "firstAppearance": "1997-07-22"
 }
 
-### DELETE CHARACTER (replace ID)
-DELETE http://localhost:8080/api/characters/1
+### DELETE — Roronoa Zoro (ID 3)
+DELETE http://localhost:8080/api/characters/3
+
+### DELETE — Jimbei (ID 4)
+DELETE http://localhost:8080/api/characters/4
+
+### DELETE — Loki (ID 5)
+DELETE http://localhost:8080/api/characters/5
+
+### DELETE — Crocodile (ID 6)
+DELETE http://localhost:8080/api/characters/6
+
+### DELETE — Dracule Mihawk (ID 7)
+DELETE http://localhost:8080/api/characters/7
+
+### READ ALL (to verify deletions)
+GET http://localhost:8080/api/characters
