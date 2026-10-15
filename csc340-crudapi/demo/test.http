@@ -1,0 +1,80 @@
+### CREATE — Dracule Mihawk
+POST http://localhost:8080/api/characters
+Content-Type: application/json
+
+{
+  "name": "Dracule Mihawk",
+  "description": "The world's strongest swordsman.",
+  "universe": "One Piece",
+  "role": "Shichibukai / Swordsman",
+  "firstAppearance": "1997-07-22"
+}
+
+### CREATE — Roronoa Zoro
+POST http://localhost:8080/api/characters
+Content-Type: application/json
+
+{
+  "name": "Roronoa Zoro",
+  "description": "Swordsman of the Straw Hat Pirates.",
+  "universe": "One Piece",
+  "role": "Straw Hat Swordsman",
+  "firstAppearance": "1997-07-22"
+}
+
+### CREATE — Jimbei
+POST http://localhost:8080/api/characters
+Content-Type: application/json
+
+{
+  "name": "Jimbei",
+  "description": "Helmsman of the Straw Hat Pirates.",
+  "universe": "One Piece",
+  "role": "Helmsman",
+  "firstAppearance": "1998-12-21"
+}
+
+### CREATE — Loki
+POST http://localhost:8080/api/characters
+Content-Type: application/json
+
+{
+  "name": "Loki",
+  "description": "Prince of Elbaf.",
+  "universe": "One Piece",
+  "role": "Prince",
+  "firstAppearance": "2016-04-04"
+}
+
+### CREATE — Crocodile
+POST http://localhost:8080/api/characters
+Content-Type: application/json
+
+{
+  "name": "Crocodile",
+  "description": "Former Warlord and co-founder of Cross Guild.",
+  "universe": "One Piece",
+  "role": "Crime Boss",
+  "firstAppearance": "1999-02-22"
+}
+
+### READ ALL CHARACTERS
+GET http://localhost:8080/api/characters
+
+### READ ONE CHARACTER (replace ID)
+GET http://localhost:8080/api/characters/1
+
+### UPDATE CHARACTER (replace ID)
+PUT http://localhost:8080/api/characters/1
+Content-Type: application/json
+
+{
+  "name": "UPDATED NAME",
+  "description": "UPDATED DESCRIPTION",
+  "universe": "One Piece",
+  "role": "UPDATED ROLE",
+  "firstAppearance": "1997-07-22"
+}
+
+### DELETE CHARACTER (replace ID)
+DELETE http://localhost:8080/api/characters/1
