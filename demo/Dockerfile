@@ -4,6 +4,7 @@ WORKDIR /app
 
 COPY . .
 
+RUN chmod +x mvnw
 RUN ./mvnw -q -DskipTests package
 
 # ---------- RUN STAGE ----------
