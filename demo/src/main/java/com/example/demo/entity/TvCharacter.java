@@ -19,7 +19,6 @@ public class TvCharacter {
     @Column(length = 1000)
     private String description;
 
-    // Your extra attributes
     @NotBlank
     private String universe;
 
@@ -28,7 +27,7 @@ public class TvCharacter {
 
     private LocalDate firstAppearance;
 
-    // Getters and setters
+    private String imageUrl;
 
     public Long getCharacterId() {
         return characterId;
@@ -76,5 +75,13 @@ public class TvCharacter {
 
     public void setFirstAppearance(LocalDate firstAppearance) {
         this.firstAppearance = firstAppearance;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }
