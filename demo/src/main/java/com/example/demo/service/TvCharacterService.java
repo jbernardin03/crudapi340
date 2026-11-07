@@ -17,16 +17,30 @@ public class TvCharacterService {
 
     public List<TvCharacter> getAll(String universe, String name) {
 
-        if (universe != null && !universe.isBlank()) {
-            return repository.findByUniverseIgnoreCase(universe);
-        }
+    boolean hasUniverse =
+            universe != null && !universe.isBlank();
 
-        if (name != null && !name.isBlank()) {
-            return repository.findByNameContainingIgnoreCase(name);
-        }
+    boolean hasName =
+            name != null && !name.isBlank();
 
-        return repository.findAll();
+    if (hasUniverse && hasName) {
+
+        return repository
+                .findByNameContainingIgnoreCaseAndUniverseIgnoreCase(
+                        name,
+                        universe);
     }
+
+    if (hasUniverse) {
+        return repository.findByUniverseIgnoreCase(universe);
+    }
+
+    if (hasName) {
+        return repository.findByNameContainingIgnoreCase(name);
+    }
+
+    return repository.findAll();
+}
 
     public TvCharacter getById(Long id) {
 

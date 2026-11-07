@@ -43,14 +43,23 @@
         Jimbei, Loki, and Crocodile.
     </p>
 
-    <h2>About the Site</h2>
+   <h2>How This Application Works</h2>
 
-    <p>
-        This project demonstrates a full-stack application using a Spring Boot backend,
-        a database for character storage, and FreeMarker templates for rendering webpages.
-        Characters can be viewed, searched, added, edited, and deleted while maintaining
-        a One Piece theme throughout the site.
-    </p>
+<p>
+This application uses Spring Boot for the backend,
+PostgreSQL for data storage, and FreeMarker templates
+for rendering webpages. Requests are handled by
+controllers, business logic is managed by the service
+layer, and character information is stored and retrieved
+through the repository layer.
+</p>
+
+<p>
+The frontend communicates with the backend by sending
+requests to Spring Boot controllers. Those controllers
+retrieve data from the database and display it through
+FreeMarker templates.
+</p>
 
 </div>
 

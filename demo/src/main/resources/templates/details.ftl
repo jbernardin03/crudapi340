@@ -55,6 +55,14 @@
 
     <br><br>
 
+    <br><br>
+
+<a href="/characters/edit/${character.characterId}">
+    Edit Character
+</a>
+
+<br><br>
+
     <form
         method="post"
         action="/characters/delete/${character.characterId}">

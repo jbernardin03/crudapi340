@@ -3,6 +3,7 @@ package com.example.demo.entity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import java.time.LocalDate;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name = "characters")
@@ -25,7 +26,10 @@ public class TvCharacter {
     @NotBlank
     private String role;
 
-    private LocalDate firstAppearance;
+    @DateTimeFormat(
+        iso = DateTimeFormat.ISO.DATE
+)
+private LocalDate firstAppearance;
 
     private String imageUrl;
 

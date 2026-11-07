@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.entity.TvCharacter;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.example.demo.service.TvCharacterService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -66,13 +67,18 @@ public class PageController {
     }
 
     @PostMapping("/characters/add")
-    public String addCharacter(
-            @ModelAttribute TvCharacter character) {
+public String addCharacter(
+        @ModelAttribute TvCharacter character,
+        RedirectAttributes ra) {
 
-        service.create(character);
+    service.create(character);
 
-        return "redirect:/";
-    }
+    ra.addFlashAttribute(
+            "successMessage",
+            character.getName() + " was added.");
+
+    return "redirect:/";
+}
 
     @GetMapping("/characters/edit/{id}")
     public String editForm(
@@ -94,21 +100,29 @@ public class PageController {
     }
 
     @PostMapping("/characters/edit/{id}")
-    public String editCharacter(
-            @PathVariable Long id,
-            @ModelAttribute TvCharacter character) {
+public String editCharacter(
+        @PathVariable Long id,
+        @ModelAttribute TvCharacter character) {
 
-        service.update(id, character);
+    service.update(id, character);
 
-        return "redirect:/character/" + id;
-    }
+    return "redirect:/character/" + id;
+}
 
     @PostMapping("/characters/delete/{id}")
-    public String deleteCharacter(
-            @PathVariable Long id) {
+public String deleteCharacter(
+        @PathVariable Long id,
+        RedirectAttributes ra) {
 
-        service.delete(id);
+    TvCharacter character =
+            service.getById(id);
 
-        return "redirect:/";
-    }
+    service.delete(id);
+
+    ra.addFlashAttribute(
+            "successMessage",
+            character.getName() + " was removed.");
+
+    return "redirect:/";
+}
 }

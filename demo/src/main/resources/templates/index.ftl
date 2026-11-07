@@ -7,6 +7,7 @@
 <body>
 
 <header>
+
     <h1>One Piece Character Gallery</h1>
 
     <nav>
@@ -14,66 +15,92 @@
         <a href="/about">About</a>
         <a href="/characters/add">Add Character</a>
     </nav>
-</header>
 
+</header>
+<#if successMessage??>
+    <h3>${successMessage}</h3>
+</#if>
 <div class="container">
 
     <form class="search-bar" action="/" method="get">
 
         <input
-            type="text"
-            name="name"
-            placeholder="Search characters..."
-            value="${name!''}">
+                type="text"
+                name="name"
+                placeholder="Search characters..."
+                value="${name!''}">
 
-        <div class="filter-buttons">
+        <select name="universe">
 
-            <button type="submit" name="universe" value="Pirates">
+            <option value="">
+                All Categories
+            </option>
+
+            <option value="Pirates">
                 Pirates
-            </button>
+            </option>
 
-            <button type="submit" name="universe" value="Revolutionary">
+            <option value="Revolutionary">
                 Revolutionary
-            </button>
+            </option>
 
-            <button type="submit" name="universe" value="Marine">
+            <option value="Marine">
                 Marine
-            </button>
+            </option>
 
-            <button type="submit" name="universe" value="Cross Guild">
+            <option value="Cross Guild">
                 Cross Guild
-            </button>
+            </option>
 
-        </div>
+        </select>
+
+        <button type="submit">
+            Search
+        </button>
+
     </form>
 
-    <div class="gallery">
+    <#if successMessage??>
 
-        <#list characters as character>
+        <h2>${successMessage}</h2>
 
-        <div class="card">
+    </#if>
 
-            <img
-                src="${character.imageUrl!'/images/chopper.jpg'}"
-                alt="${character.name}">
+    <#if characters?size == 0>
 
-            <h3>${character.name}</h3>
+        <h2>No characters found.</h2>
 
-            <p><strong>Role:</strong> ${character.role}</p>
+    <#else>
 
-            <p>${character.description}</p>
+        <div class="gallery">
 
-            <p><strong>Category:</strong> ${character.universe}</p>
+            <#list characters as character>
 
-            <a href="/character/${character.characterId}">
-                View Details
-            </a>
+                <div class="card">
+
+                    <img
+                         src="${character.imageUrl!'/images/chopper.jpg'}"
+                         alt="${character.name}">
+
+                    <h3>${character.name}</h3>
+
+                    <p>${character.role}</p>
+
+                    <p>${character.universe}</p>
+
+                    <p>${character.description}</p>
+
+                    <a href="/character/${character.characterId}">
+                        View Details
+                    </a>
+
+                </div>
+
+            </#list>
 
         </div>
 
-        </#list>
-
-    </div>
+    </#if>
 
 </div>
 
