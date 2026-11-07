@@ -1,11 +1,11 @@
 package com.example.demo.controller;
 
 import com.example.demo.entity.TvCharacter;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.example.demo.service.TvCharacterService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class PageController {
@@ -32,7 +32,7 @@ public class PageController {
         return "index";
     }
 
-    @GetMapping("/character/{id}")
+    @GetMapping("/characters/{id}")
     public String details(
             @PathVariable Long id,
             Model model) {
@@ -56,31 +56,31 @@ public class PageController {
         return "about";
     }
 
-    @GetMapping("/characters/add")
+    @GetMapping("/characters/new")
     public String addForm(Model model) {
 
         model.addAttribute(
                 "character",
                 new TvCharacter());
 
-        return "new-character-form";
+        return "character-form";
     }
 
-    @PostMapping("/characters/add")
-public String addCharacter(
-        @ModelAttribute TvCharacter character,
-        RedirectAttributes ra) {
+    @PostMapping("/characters")
+    public String addCharacter(
+            @ModelAttribute TvCharacter character,
+            RedirectAttributes ra) {
 
-    service.create(character);
+        service.create(character);
 
-    ra.addFlashAttribute(
-            "successMessage",
-            character.getName() + " was added.");
+        ra.addFlashAttribute(
+                "successMessage",
+                character.getName() + " was added.");
 
-    return "redirect:/";
-}
+        return "redirect:/";
+    }
 
-    @GetMapping("/characters/edit/{id}")
+    @GetMapping("/characters/{id}/edit")
     public String editForm(
             @PathVariable Long id,
             Model model) {
@@ -91,7 +91,7 @@ public String addCharacter(
                     "character",
                     service.getById(id));
 
-            return "new-character-form";
+            return "character-form";
 
         } catch (RuntimeException e) {
 
@@ -99,30 +99,42 @@ public String addCharacter(
         }
     }
 
-    @PostMapping("/characters/edit/{id}")
-public String editCharacter(
-        @PathVariable Long id,
-        @ModelAttribute TvCharacter character) {
+    @PostMapping("/characters/{id}")
+    public String editCharacter(
+            @PathVariable Long id,
+            @ModelAttribute TvCharacter character,
+            RedirectAttributes ra) {
 
-    service.update(id, character);
+        service.update(id, character);
 
-    return "redirect:/character/" + id;
-}
+        ra.addFlashAttribute(
+                "successMessage",
+                character.getName() + " was updated.");
 
-    @PostMapping("/characters/delete/{id}")
-public String deleteCharacter(
-        @PathVariable Long id,
-        RedirectAttributes ra) {
+        return "redirect:/characters/" + id;
+    }
 
-    TvCharacter character =
-            service.getById(id);
+    @PostMapping("/characters/{id}/delete")
+    public String deleteCharacter(
+            @PathVariable Long id,
+            RedirectAttributes ra) {
 
-    service.delete(id);
+        try {
 
-    ra.addFlashAttribute(
-            "successMessage",
-            character.getName() + " was removed.");
+            TvCharacter character =
+                    service.getById(id);
 
-    return "redirect:/";
-}
+            service.delete(id);
+
+            ra.addFlashAttribute(
+                    "successMessage",
+                    character.getName() + " was removed.");
+
+            return "redirect:/";
+
+        } catch (RuntimeException e) {
+
+            return "not-found";
+        }
+    }
 }

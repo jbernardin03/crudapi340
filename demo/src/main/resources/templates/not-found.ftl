@@ -1,26 +1,15 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Character Not Found</title>
-    <link rel="stylesheet" href="/style.css">
-</head>
-<body>
+<#import "layout.ftl" as layout>
 
-<div class="container">
+<@layout.page title="Character Not Found">
 
-    <h1>404</h1>
+<h1>Character Not Found</h1>
 
-    <h2>Character Not Found</h2>
+<p>
+    The character you requested does not exist.
+</p>
 
-    <p>
-        The requested character does not exist.
-    </p>
+<a href="/">
+    Return Home
+</a>
 
-    <a href="/">
-        Return to Gallery
-    </a>
-
-</div>
-
-</body>
-</html>
+</@layout.page>

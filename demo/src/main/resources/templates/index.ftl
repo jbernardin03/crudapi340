@@ -1,108 +1,64 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>One Piece Character Gallery</title>
-    <link rel="stylesheet" href="/style.css">
-</head>
-<body>
+<#import "layout.ftl" as layout>
 
-<header>
+<@layout.page title="One Piece Character Gallery">
 
-    <h1>One Piece Character Gallery</h1>
+<form class="search-bar" action="/" method="get">
 
-    <nav>
-        <a href="/">Home</a>
-        <a href="/about">About</a>
-        <a href="/characters/add">Add Character</a>
-    </nav>
+    <input
+            type="text"
+            name="name"
+            placeholder="Search characters..."
+            value="${name!''}">
 
-</header>
-<#if successMessage??>
-    <h3>${successMessage}</h3>
-</#if>
-<div class="container">
+    <select name="universe">
 
-    <form class="search-bar" action="/" method="get">
+        <option value="">All Categories</option>
 
-        <input
-                type="text"
-                name="name"
-                placeholder="Search characters..."
-                value="${name!''}">
+        <option value="Pirates">Pirates</option>
+        <option value="Revolutionary">Revolutionary</option>
+        <option value="Marine">Marine</option>
+        <option value="Cross Guild">Cross Guild</option>
 
-        <select name="universe">
+    </select>
 
-            <option value="">
-                All Categories
-            </option>
+    <button type="submit">Search</button>
 
-            <option value="Pirates">
-                Pirates
-            </option>
+</form>
 
-            <option value="Revolutionary">
-                Revolutionary
-            </option>
+<#if characters?size == 0>
 
-            <option value="Marine">
-                Marine
-            </option>
+    <h2>No characters found.</h2>
 
-            <option value="Cross Guild">
-                Cross Guild
-            </option>
+<#else>
 
-        </select>
+<div class="gallery">
 
-        <button type="submit">
-            Search
-        </button>
+<#list characters as character>
 
-    </form>
+<div class="card">
 
-    <#if successMessage??>
+    <img
+        src="${character.imageUrl!'/images/chopper.jpg'}"
+        alt="${character.name}">
 
-        <h2>${successMessage}</h2>
+    <h3>${character.name}</h3>
 
-    </#if>
+    <p>${character.role}</p>
 
-    <#if characters?size == 0>
+    <p>${character.universe}</p>
 
-        <h2>No characters found.</h2>
+    <p>${character.description}</p>
 
-    <#else>
-
-        <div class="gallery">
-
-            <#list characters as character>
-
-                <div class="card">
-
-                    <img
-                         src="${character.imageUrl!'/images/chopper.jpg'}"
-                         alt="${character.name}">
-
-                    <h3>${character.name}</h3>
-
-                    <p>${character.role}</p>
-
-                    <p>${character.universe}</p>
-
-                    <p>${character.description}</p>
-
-                    <a href="/character/${character.characterId}">
-                        View Details
-                    </a>
-
-                </div>
-
-            </#list>
-
-        </div>
-
-    </#if>
+    <a href="/characters/${character.characterId?c}">
+        View Details
+    </a>
 
 </div>
 
-</body>
-</html>
+</#list>
+
+</div>
+
+</#if>
+
+</@layout.page>
